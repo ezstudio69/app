@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Hướng dẫn viết extension cho app Đọc Truyện</title>
+        <!-- Link Bootstrap 5 CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+        <style>
+            body {
+                position: relative;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Nội dung chính -->
+        <div class="container my-5">
+            <div id="section1" class="mb-5">
+                <h2>Giới thiệu</h2>
+                <p>Đây là hướng dẫn viết extension</p>
+            </div>
+            <div id="section2" class="mb-5">
+                <h2>Extension mẫu:</h2>
+                <p>Tải về extension mẫu tại đây: <a href="https://ezstudio69.github.io/app/sample.zip">sample.zip</a>
+                </p>
+                <p>Chú ý: Tuyệt đối không để file nào trong extension có kích thước bằng 0 (file rỗng) -> Gây lỗi</p>
+            </div>
+            <div id="section3" class="mb-5">
+                <h2>Cấu trúc extension:</h2>
+                <p>Tất cả các file nằm trong 1 thư mục (VD: example), và nén thư mục đó thành file zip (VD: example.zip)
+                </p>
+                <p>Cấu trúc thư mục cho extension tên sample như sau:
+                </p>
+                <pre>
+                    <code class="language-js">
+                        example:
+                        ----plugin.json
+                        ----icon.png
+                        ----src
+                        ---- ----home.js: (bắt buộc: là danh sách các tab)
+                        ---- ----genre.js: (không bắt buộc)
+                        ---- ----gen.js: (bắt buộc: là code parse danh sách truyện)
+                        ---- ----search.js: (bắt buộc: là code parse tìm kiếm)
+                        ---- ----detail.js: (bắt buộc: là code parse mô tả truyện)
+                        ---- ----page.js: (không bắt buộc: nếu web có chia mục lục thành nhiều trang, code này để trả về url từng trang cho mục lục)
+                        ---- ----toc.js: (bắt buộc: code này parse mục lục)
+                        ---- ----chap.js: (bắt buộc: code này parse nội dung chương)
+                    </code>
+                </pre>
+            </div>
+            <div id="section4" class="mb-5">
+                <h2>Cấu trúc plugin.json:</h2>
+                <p>Các file javascript trả về theo định dạng ở plugin mẫu, query data từ DOM document (xem ví dụ và chế cháo nhé mọi người!)</p>
+                <pre>
+                    <code class="language-js">
+                        {
+                            "metadata": {
+                              "id" : "xxxxxxx",
+                              "name": "Tên trang web",
+                              "author": "web",
+                              "version": 1,
+                              "source": "sample",
+                              "base_url": "sample.com",
+                              "regexp": "",
+                              "description": "Đọc truyện trên trang sample...",
+                              "locale": "vi_VN",
+                              "type": "novel",
+                              "language": "javascript"
+                            },
+                            "script": {
+                              "home": "home.js",
+                              "genre": "genre.js",
+                              "search": {
+                                "url": "https://sample.com/tim-kiem/?tukhoa=",
+                                "search": "",
+                                "page": "&page=",
+                                "script": "search.js"
+                              },
+                              "detail": {
+                                "url": "",
+                                "script": "detail.js"
+                              },
+                              "page": {
+                                "url": "",
+                                "script": "page.js"
+                              },
+                              "toc": {
+                                "url": "",
+                                "script": "toc.js"
+                              },
+                              "chap": {
+                                "url": "",
+                                "script": "chap.js"
+                              }
+                            }
+                          }
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <!-- Prism.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    </body>
+</html>
